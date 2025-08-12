@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void findMinMax(int array[], int N, int *min, int *max) {
+    *min = array[0]; // Αρχικοποίηση του min με τον πρώτο αριθμό του πίνακα
+    *max = array[0]; // Αρχικοποίηση του max με τον πρώτο αριθμό του πίνακα
+
+    for (int i = 1; i < N; i++) {
+        if (array[i] < *min) {
+            *min = array[i]; // Ενημέρωση του min αν βρεθεί μικρότερος αριθμός
+        }
+        if (array[i] > *max) {
+            *max = array[i]; // Ενημέρωση του max αν βρεθεί μεγαλύτερος αριθμός
+        }
+    }
+}
+
+int main() {
+    int N;
+    printf("Δώστε το μέγεθος του πίνακα: ");
+    scanf("%d", &N);
+
+    int *array = (int *)malloc(N * sizeof(int));
+    if (array == NULL) {
+        printf("Απέτυχε η δέσμευση μνήμης.\n");
+        return 1;
+    }
+
+    printf("Δώστε τους αριθμούς του πίνακα:\n");
+    for (int i = 0; i < N; i++) {
+        printf("Αριθμός %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+
+    int min, max;
+    findMinMax(array, N, &min, &max);
+
+    printf("Ο μικρότερος αριθμός είναι: %d\n", min);
+    printf("Ο μεγαλύτερος αριθμός είναι: %d\n", max);
+
+    free(array);
+
+    return 0;
+}
